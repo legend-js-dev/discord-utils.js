@@ -6,21 +6,23 @@ npm i discord-utils.js
 ```
 ### Getting started:
 ```js
-const Discord = require("discord.js")
-const { Client } = require("discord.js")
-const util = require("discord-utils.js")
-const client = new Client()
+const Discord = require("discord.js") //require discord
+const { Client } = require("discord.js") //require client
+const util = require("discord-utils.js") //require discord-utils.js
+const client = new Client() //create the client
 
 client.on("message", async (message) => {
 if (message.content.startsWith("!communist")) {
 let user = message.mentions.users.first()
-let avatar = user.displayAvatarURL({ format: "png" })
-let image = util.Canvas.communist(avatar)
+let avatar = user.displayAvatarURL({ format: "png" }) //gets the url of the members avatar
+let image = util.Canvas.communist(avatar) //creates the communist image
 message.channel.send({
 files: [{
 image
 }]
-})
+}) //send the image
 }
 })
+
+client.login("token")
 ```
