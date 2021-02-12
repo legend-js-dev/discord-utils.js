@@ -6,23 +6,51 @@ npm i discord-utils.js
 ```
 ### Getting started:
 ```js
-const Discord = require("discord.js") //require discord
-const { Client } = require("discord.js") //require client
-const util = require("discord-utils.js") //require discord-utils.js
-const client = new Client() //create the client
+const Discord = require("discord.js")
+const { Client } = require("discord.js")
+const util = require("discord-utils.js")
+const client = new Client()
 
 client.on("message", async (message) => {
 if (message.content.startsWith("!communist")) {
 let user = message.mentions.users.first()
-let avatar = user.displayAvatarURL({ format: "png" }) //gets the url of the members avatar
-let image = util.Canvas.communist(avatar) //creates the communist image
+let avatar = user.displayAvatarURL({ format: "png" })
+let image = await util.Canvas.communist(avatar)
 message.channel.send({
 files: [{
-image
+name: "image.png",
+attachment: image
 }]
-}) //send the image
+})
 }
 })
 
 client.login("token")
 ```
+### if you use a command handler it would look like this:
+```js
+const { Canvas } = require("discord-utils.js")
+
+module.exports = {
+name: "communist",
+description: "sends an image with the communist filter",
+run: async (client, message, args) => {
+let user = message.mentions.users.first() || message.author
+let avatar = user.displayAvatarURL()
+let image = await Canvas.communist(avatar)
+message.channel.send({
+files: [{
+name: "image.png",
+attachment: image
+}]
+})
+}
+}
+```
+
+### Links:
+- Discord Server - [click here](https://discord.gg/BPCs7qXXbk)
+- Documentation - [click here](https://l3g3nd-0001.gitbook.io/discord-utils-js/)
+- Surprise - [click here](https://youtu.be/dQw4w9WgXcQ)
+
+#### Note: the list of Canvas methods are listed on the documentation
